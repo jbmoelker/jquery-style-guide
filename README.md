@@ -16,8 +16,50 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 ## Table of Contents
 
 * [About jQuery](#about-jquery)
-
+* [Avoid using `.animate()` method when possible](#avoid-using-`.animate()`-method-when-possible)
 
 ## About jQuery
 
 [jQuery](http://jquery.com/) is a utility library for easy DOM access & manipulation, event handling, Ajax and more. By using jQuery you can write consise and expressive code which works across modern and legacy browsers. jQuery has extensive tests, detailed documentation, a large active community and an ecosystem of plugins.
+
+## Avoid using `.animate()` method when possible
+### Why?
+Most of the time the same can be accomplished with toggling classes and using CSS transition and/or keyframes.
+
+### How?
+``` javascript
+var $myElement = $('[my-element]');
+
+// Bad
+function animateElement() {
+  $myElement.animate({
+    	opacity: 0.0
+    },
+    1000)
+    .animate({
+    	opacity: 1
+    },
+    1000,
+    function() {
+    	animateElement();
+    });
+}
+animateElement();
+
+// Good
+$myElement.addClass('animate');
+```
+
+``` css
+.animate {
+    animation: fade 2s infinite;
+}
+
+@keyframes fade {
+	0%   { opacity: 1; }
+	50%  { opacity: 0; }
+	100% { opacity: 1; }
+}
+```
+
+[↑ back to Table of Contents](#table-of-contents)
