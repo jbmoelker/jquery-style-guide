@@ -39,3 +39,5 @@ jQuery is the swiss army knive for DOM and event handling and much more. While j
 
 * Use a lightweight alternative like [Dominus](https://github.com/bevacqua/dominus#readme), [Shoestring](https://github.com/filamentgroup/shoestring#readme) or [Zepto](https://github.com/madrobby/zepto#readme).
 * [Create a jQuery custom build](#create-a-custom-build) to only include the features you need.
+
+[↑ back to Table of Contents](#table-of-contents)
