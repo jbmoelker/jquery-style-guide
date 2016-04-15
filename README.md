@@ -39,3 +39,5 @@ Since the release of jQuery many of its features now have a native browser equiv
 * Only apply Javascript after feature detection. Use a server-side rendered page as a basis. Enhance parts of a page only if the browser natively supports the required technology.
 * Consult [platform.html5.org](https://platform.html5.org/) for overview of native browser technologies and [Can I use](http://caniuse.com/) and [Kangax tables](http://kangax.github.io/compat-table/es5/) for browser compatibility.
 * Consult [you might not need jQuery](http://youmightnotneedjquery.com/) for native alternatives to jQuery features.
+
+[↑ back to Table of Contents](#table-of-contents)
