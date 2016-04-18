@@ -18,6 +18,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [About jQuery](#about-jquery)
 * [Consider native browser features](#consider-native-browser-features)
 * [Consider lightweight alternative](#consider-lightweight-alternative)
+* [Avoid `.ready()`](#avoid-ready)
 
 ## About jQuery
 
@@ -58,5 +59,52 @@ jQuery is the swiss army knive for DOM and event handling and much more. While j
 
 * Use a lightweight alternative like [Dominus](https://github.com/bevacqua/dominus#readme), [Shoestring](https://github.com/filamentgroup/shoestring#readme) or [Zepto](https://github.com/madrobby/zepto#readme).
 * [Create a jQuery custom build](#create-a-custom-build) to only include the features you need.
+
+[↑ back to Table of Contents](#table-of-contents)
+
+
+## Avoid `.ready()`
+
+jQuery's [`.ready()`](https://api.jquery.com/ready/) ensures your script is not executed before the DOM is ready. This is important because we typically want to access the DOM in our script. However, since the script can't be executed before the DOM is ready, a better practice is to defer script execution.
+
+### Why?
+
+* Using `.ready()` means scripts have been loaded too early. Therefore defer loading instead.
+* Script loading blocks page rendering. Therefore script loading should be defered. 
+
+### How?
+
+Avoid loading scripts too early and waiting for the DOM to be ready using `.ready()`.
+Defer script loading by placing scripts just before the closing `</body>` tag or using the [`defer` attribute](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-defer):
+
+```html
+<!-- recommended: load in tail -->
+<body>
+   ...
+	<script src="path/to/jquery.min.js"></script>
+	<script>/* DOM is ready, use jQuery directly */</script>
+</body>
+```
+
+```html
+<!-- recommended: defer script loading -->
+<head>
+	...
+	<script defer src="path/to/jquery.min.js"></script>
+	<script defer src="path/to/my-app.min.js"></script>
+</head>
+```
+
+Note: Be aware [using `defer` in IE <= 9 can cause issues](https://github.com/h5bp/lazyweb-requests/issues/42). So consider your browser scope before using this setup.
+
+```html
+<!-- avoid: -->
+<head>
+	...
+	<script src="path/to/jquery.min.js"></script>
+	<script>jQuery.ready(function(){ /* ... */ });</script>
+	<!-- same applies to external script containing `.ready()` -->
+</head>
+```
 
 [↑ back to Table of Contents](#table-of-contents)
