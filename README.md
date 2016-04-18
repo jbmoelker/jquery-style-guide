@@ -17,7 +17,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 
 * [About jQuery](#about-jquery)
 * [Consider native browser features](#consider-native-browser-features)
-
+* [Consider lightweight alternative](#consider-lightweight-alternative)
 
 ## About jQuery
 
@@ -39,5 +39,24 @@ Since the release of jQuery many of its features now have a native browser equiv
 * Only apply Javascript after feature detection. Use a server-side rendered page as a basis. Enhance parts of a page only if the browser natively supports the required technology.
 * Consult [platform.html5.org](https://platform.html5.org/) for overview of native browser technologies and [Can I use](http://caniuse.com/) and [Kangax tables](http://kangax.github.io/compat-table/es5/) for browser compatibility.
 * Consult [you might not need jQuery](http://youmightnotneedjquery.com/) for native alternatives to jQuery features.
+
+[↑ back to Table of Contents](#table-of-contents)
+
+
+## Consider lightweight alternative
+
+jQuery is the swiss army knive for DOM and event handling and much more. While jQuery offers a wide range of features, you might not need most of them in your project. Simply because you have little functionality or only modern browsers to support. In that case consider a lightweight alternative.
+
+### Why?
+
+* Lightweight alternatives have a smaller file size and can therefore be downloaded faster.
+* Lightweight alternatives have less wrapper functionality which typically makes them faster.
+* Some lightweight alternatives support only newer browsers and can therefore stay closer to native browser methods. This typically makes them more performant and easier to understand.
+* Some lightweight alternatives mimic the jQuery API. Which means if you know jQuery, you know the alternative.
+
+### How?
+
+* Use a lightweight alternative like [Dominus](https://github.com/bevacqua/dominus#readme), [Shoestring](https://github.com/filamentgroup/shoestring#readme) or [Zepto](https://github.com/madrobby/zepto#readme).
+* [Create a jQuery custom build](#create-a-custom-build) to only include the features you need.
 
 [↑ back to Table of Contents](#table-of-contents)
