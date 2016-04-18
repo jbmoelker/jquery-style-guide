@@ -19,6 +19,8 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Consider native browser features](#consider-native-browser-features)
 * [Consider lightweight alternative](#consider-lightweight-alternative)
 * [Avoid `.ready()`](#avoid-ready)
+* [Assign `jQuery` to `$`](#assign-jquery-to-)
+
 
 ## About jQuery
 
@@ -105,6 +107,34 @@ Note: Be aware [using `defer` in IE <= 9 can cause issues](https://github.com/h5
 	<script>jQuery.ready(function(){ /* ... */ });</script>
 	<!-- same applies to external script containing `.ready()` -->
 </head>
+```
+
+[↑ back to Table of Contents](#table-of-contents)
+
+
+## Assign `jQuery` to `$`
+
+## Why?
+
+* Assigning `jQuery` to `$` is a common practice, which developers are familiair to.
+* Assigning `jQuery` to `$` within a scope, avoids unexpected conflict with other scripts using `$`.
+* The jQuery documentation and other resources typically use `$`.
+
+## How?
+
+Explicitly assign `jQuery` to `$` within a scope. When using a module loader (like CommonJS) assign it directly to a variable named `$`. Otherwise use an [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) (immediately-invoked function expression):
+
+```javascript
+/* recommended when using module loader, like CommonJS: */
+const $ = require('jquery');
+// use jQuery as $
+```
+
+```javascript
+/* recommended: use an IIFE */
+(function($){
+	// use jQuery as $
+}(jQuery));
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
