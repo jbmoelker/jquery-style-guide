@@ -36,7 +36,7 @@ jQuery's [`.ready()`](https://api.jquery.com/ready/) ensures your script is not 
 ### How?
 
 Avoid loading scripts too early and waiting for the DOM to be ready using `.ready()`.
-Defer script loading by placing scripts just before the closing `</body>` tag or using the `defer` attribute:
+Defer script loading by placing scripts just before the closing `</body>` tag or using the [`defer` attribute](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-defer):
 
 ```html
 <!-- recommended: load in tail -->
@@ -55,6 +55,8 @@ Defer script loading by placing scripts just before the closing `</body>` tag or
 	<script defer src="path/to/my-app.min.js"></script>
 </head>
 ```
+
+Note: Be aware [using `defer` in IE <= 9 can cause issues](https://github.com/h5bp/lazyweb-requests/issues/42). So consider your browser scope before using this setup.
 
 ```html
 <!-- avoid: -->
