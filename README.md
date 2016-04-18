@@ -34,7 +34,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 
 ## How?
 
-Explicitly assign `jQuery` to `$` within a scope. When using a module loader (like CommonJS) assign it directly to a variable named `$`. Otherwise use an IIFE (immediately-invoked function expression):
+Explicitly assign `jQuery` to `$` within a scope. When using a module loader (like CommonJS) assign it directly to a variable named `$`. Otherwise use an [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) (immediately-invoked function expression):
 
 ```javascript
 /* recommended when using module loader, like CommonJS: */
