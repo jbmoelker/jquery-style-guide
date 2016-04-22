@@ -16,29 +16,24 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 ## Table of Contents
 
 * [About jQuery](#about-jquery)
-* [Optimise selectors by avoiding excessive specificity](#optimise-selectors-by-avoiding-excessive-specificity)
+* [Optimise selectors for performance](#optimise-selectors-for-performance)
 
 ## About jQuery
 
 [jQuery](http://jquery.com/) is a utility library for easy DOM access & manipulation, event handling, Ajax and more. By using jQuery you can write consise and expressive code which works across modern and legacy browsers. jQuery has extensive tests, detailed documentation, a large active community and an ecosystem of plugins.
 
-## Optimise selectors by avoiding excessive specificity
+## Optimise selectors for performance
 ### Why?
-When selecting elements you should always try to do it by creating a selector that is exactly specific enough for your case.
+* Always try to create a selector that is exactly specific enough for your case. Make sure you don't depend on a specific HTML structure.
+* Creating good selectors makes your HTML more flexible.
 
 ### How?
 ``` javascript
-// Bad
-var $amount = $('.data table.stats td.amount');
+/* avoid: overly specific */
+var $amount = $('[data-table] [data-table-stats] [data-table-amount]');
 
-// Better: Drop the middle if possible
-var $amount = $('.data td.amount');
-
-// Better: Using `.find()` which is highly optimised
-var $amount = $('.data').find('.amount');
-
-// Best: Add a specific selector to the element
-var $amount = $('[data-table-amount]');
+/* recommended: using `.find()` which is highly optimised on the parent element */
+var $amount = $('[data-table]').find('[data-table-amount]');
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
