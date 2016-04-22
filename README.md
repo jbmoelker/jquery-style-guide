@@ -16,26 +16,33 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 ## Table of Contents
 
 * [About jQuery](#about-jquery)
-* [Avoid using the `.css()` method](#avoid-using-the-.css()-method)
+* [Avoid using `.css()`](#avoid-using-.css())
 
 ## About jQuery
 
 [jQuery](http://jquery.com/) is a utility library for easy DOM access & manipulation, event handling, Ajax and more. By using jQuery you can write consise and expressive code which works across modern and legacy browsers. jQuery has extensive tests, detailed documentation, a large active community and an ecosystem of plugins.
 
-## Avoid using the `.css()` method
+## Avoid using `.css()`
+jQuery can get and set styling directly on an element with the [`.css()`](https://api.jquery.com/css/) method.
+When using `.css()` to set CSS it will set the styles inline and you are mixing concerns (styling and logic).
+
 ### Why?
-In most cases toggling a class can accomplish the same thing.
-By not using the  `.css()` method this can be omitted when creating a custom jQuery build to reduce the size.
+* By toggling classes the same thing can be accomplished.
+* Separation of concerns, don't mix CSS with JavaScript.
+* When the `.css()` method is not used it can be omitted when creating a custom jQuery build.
 
 ### How?
 ``` javascript
-var $myElement = $('[my-element]');
+/* avoid: mixing JavaScript and CSS */
+$('[my-element]').css('border', '1px solid green');
 
-// Bad
-$myElement.css('border', '1px solid green');
+/* recommended: using a class */
+$('[my-element]').addClass('is-active');
+```
 
-// Good
-$myElement.addClass('is-active');
+``` css
+/* CSS */
+.is-active { border: 1px solid green; }
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
