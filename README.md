@@ -16,7 +16,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 ## Table of Contents
 
 * [About jQuery](#about-jquery)
-* [Avoid using `.css()`](#avoid-using-.css())
+* [Avoid using `.css()`](#avoid-using-css)
 
 ## About jQuery
 
