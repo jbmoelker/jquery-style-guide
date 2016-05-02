@@ -20,6 +20,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Consider lightweight alternative](#consider-lightweight-alternative)
 * [Avoid `.ready()`](#avoid-ready)
 * [Assign `jQuery` to `$`](#assign-jquery-to-)
+* [Avoid `.show()`, `.hide()` and `.toggle()`](#avoid-show-hide-and-toggle)
 
 
 ## About jQuery
@@ -135,6 +136,88 @@ const $ = require('jquery');
 (function($){
 	// use jQuery as $
 }(jQuery));
+```
+
+[↑ back to Table of Contents](#table-of-contents)
+
+
+## Avoid `.show()`, `.hide()` and `.toggle()`
+
+JQuery let's you [`.show()`](http://api.jquery.com/show/), [`.hide()`](http://api.jquery.com/hide/) and [`.toggle()`](http://api.jquery.com/toggle/) elements. jQuery toggles an inline `display: none` to achieve this. 
+HTML5 introduces a [new global attribute named `[hidden]`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden), which is styled as `display: none` by default. It's better practice to use this native standard and toggle `[hidden]` instead of using  `.show()`, `.hide()` and `.toggle()`.
+
+### Why?
+
+* Avoid `.show()`, `.hide()` and `.toggle()` as they use inline styles, which are hard to overwrite.
+* Prefer `[hidden]` as it semantically indicates an element is not yet, or no longer, relevant.
+* Styles should be managed in (external) CSS stylesheets (not inlined) for separation of concerns.
+
+### How?
+
+Add, remove or toggle the `[hidden]` attribute instead of using `.show()`, `.hide()` or `.toggle()`.
+
+Note: If you need to support pre HTML5 browsers use CSS to style `[hidden]` correctly:
+```css
+/* recommended: ensure hidden elements are not displayed in pre HTML5 browsers */
+[hidden] { display: none !important; }
+```
+
+#### Show elements
+
+```javascript
+/* avoid: `.show()` elements */
+$elements.show();
+
+/* recommended: add `[hidden]` attribute */
+$elements.attr('hidden', '');
+```
+
+#### Hide elements
+
+```javascript
+/* avoid: `.hide()` elements */
+$elements.hide();
+
+/* recommended: remove `[hidden]` attribute */
+$elements.removeAttr('hidden');
+```
+
+#### Toggle elements
+
+```javascript
+/* avoid: `toggle()` elements */
+$elements.toggle();
+```
+
+```javascript
+/* recommended: toggle hidden attribute (with jQuery): */
+// add `toggleHidden` functionality as jQuery plugin
+$.fn.toggleHidden = function() {
+	return this.each(function(index, element) {
+		var $element = $(element);
+		if ($element.attr('hidden')) {
+			$element.removeAttr('hidden')
+		} else {
+			$element.attr('hidden', '');
+		}
+	});
+};
+
+// call `toggleHidden` on element:
+$elements.toggleHidden();
+```
+
+```javascript
+/* recommended: toggle hidden attribute (without jQuery): */
+$elements.get().forEach(toggleHidden);
+
+function toggleHidden(element) {
+	if (element.hasAttribute('hidden')) {
+		element.removeAttribute('hidden')
+	} else {
+		element.setAttribute('hidden', '');
+	}
+}
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
