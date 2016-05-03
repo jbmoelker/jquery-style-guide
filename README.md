@@ -113,7 +113,7 @@ Note: Be aware [using `defer` in IE <= 9 can cause issues](https://github.com/h5
 [↑ back to Table of Contents](#table-of-contents)
 
 
-## Assign `jQuery` to `## 
+## Assign jQuery to $
 
 ## Why?
 
