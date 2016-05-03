@@ -32,13 +32,13 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 
 Since the release of jQuery many of its features now have a native browser equivalent. For example adding a class to an element can now be achieved via `element.classList.add(className)` instead of `$(element).addClass(className)`. Depending on the needs of your project you may be able to use only native browser features.
 
-## Why?
+### Why?
 
 * Native browser features are following the spec, making them future proof.
 * Native browser features are closer to the metal, making them faster than jQuery.
 * Developers who already know JavaScript don't need to learn the specifics of jQuery.
 
-## How?
+### How?
 
 * Only apply Javascript after feature detection. Use a server-side rendered page as a basis. Enhance parts of a page only if the browser natively supports the required technology.
 * Consult [platform.html5.org](https://platform.html5.org/) for overview of native browser technologies and [Can I use](http://caniuse.com/) and [Kangax tables](http://kangax.github.io/compat-table/es5/) for browser compatibility.
@@ -115,13 +115,13 @@ Note: Be aware [using `defer` in IE <= 9 can cause issues](https://github.com/h5
 
 ## Assign `jQuery` to `$`
 
-## Why?
+### Why?
 
 * Assigning `jQuery` to `$` is a common practice, which developers are familiair to.
 * Assigning `jQuery` to `$` within a scope, avoids unexpected conflict with other scripts using `$`.
 * The jQuery documentation and other resources typically use `$`.
 
-## How?
+### How?
 
 Explicitly assign `jQuery` to `$` within a scope. When using a module loader (like CommonJS) assign it directly to a variable named `$`. Otherwise use an [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) (immediately-invoked function expression):
 
