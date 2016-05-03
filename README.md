@@ -113,7 +113,7 @@ Note: Be aware [using `defer` in IE <= 9 can cause issues](https://github.com/h5
 [↑ back to Table of Contents](#table-of-contents)
 
 
-## Assign `jQuery` to `$`
+## Assign `jQuery` to `## 
 
 ## Why?
 
@@ -218,6 +218,48 @@ function toggleHidden(element) {
 		element.setAttribute('hidden', '');
 	}
 }
+```
+
+[↑ back to Table of Contents](#table-of-contents)
+
+
+## Prefer prop() over attr() for reading attribute state
+
+In JQuery you can read attribute values with [`attr()`](http://api.jquery.com/attr/) or with [`prop()`](http://api.jquery.com/prop/). At first they seem very similar, but there's a subtle yet important difference:
+
+> **attr()**
+> Get the value of an *attribute* for the first element in the set of matched elements.
+
+This gets the value of an attribute as declared in HTML.
+
+> **prop()**
+> Get the value of a *property* for the first element in the set of matched elements.
+
+This gets the value of the corresponding property in the DOM. On page load, the value of the property is the same as the attribute value in HTML. If you want the *initial* value then it's safe to use `attr()`. In all other, cases it's safer to use `prop()`.
+
+### Why?
+
+* In the future, JavaScript logic may be added to your page that changes the state of the property value (e.g. an input field is set to `disabled`). When reading the value with `prop()` it will still return the correct value.
+* `prop()` returns a boolean value for the `checked`, `selected`, `disabled` and `hidden` while `attr()` returns the string equivalent (e.g. `checked` or `undefined`). 
+* As of JQuery 1.6 you cannot use `attr()` anymore to get the value of DOM properties such as `selectedIndex`, `tagName` or `defaultSelected`. These DOM properties don't have corresponding HTML attributes, so you should use `prop()` to get their value (see [JQuery documentation](http://api.jquery.com/prop/)).
+* `attr()` calls `prop()` internally so it is slightly slower.
+
+### How?
+
+```javascript
+// recommended: use prop() for getting the state of a checkbox
+$('input[type=checkbox]').first().prop('checked'); // check if first checkbox on the page is checked
+```
+
+```javascript
+// avoid: 
+$('input[type=checkbox]').first().attr('checked'); // only gets initial attribute value
+```
+A valid example for getting the initial value:
+
+```javascript
+//recommended: use attr() when initial value does not change
+charset = $('meta').attr('charset'); // UTF-8
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
