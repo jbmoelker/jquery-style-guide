@@ -45,12 +45,15 @@ function animateElement() {
     });
 }
 animateElement();
+```
 
+```javascript
 // Good
 $myElement.addClass('is-animating');
 ```
 
 ``` css
+// vendor prefix might be required
 .is-animating {
     animation: fade 2s infinite;
 }
@@ -60,7 +63,6 @@ $myElement.addClass('is-animating');
 	50%  { opacity: 0; }
 	100% { opacity: 1; }
 }
-// vendor prefix might be required
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
