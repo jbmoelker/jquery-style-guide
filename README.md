@@ -22,7 +22,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 
 [jQuery](http://jquery.com/) is a utility library for easy DOM access & manipulation, event handling, Ajax and more. By using jQuery you can write consise and expressive code which works across modern and legacy browsers. jQuery has extensive tests, detailed documentation, a large active community and an ecosystem of plugins.
 
-## Use .detach() before heavy DOM operations
+## Use [.detach()](http://api.jquery.com/detach/) before heavy DOM operations
 ### Why?
 Because updating the DOM is heavy on the client elements should be [.detach()](http://api.jquery.com/detach/) -ed when updating multiple things.
 
