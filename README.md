@@ -16,31 +16,28 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 ## Table of Contents
 
 * [About jQuery](#about-jquery)
-* [Cache selectors](#cache-selectors)
+* [Cache jQuery lookups](#cache-jquery-lookups)
 
 
 ## About jQuery
 
 [jQuery](http://jquery.com/) is a utility library for easy DOM access & manipulation, event handling, Ajax and more. By using jQuery you can write consise and expressive code which works across modern and legacy browsers. jQuery has extensive tests, detailed documentation, a large active community and an ecosystem of plugins.
 
-## Cache selectors
+## Cache jQuery lookups
 ### Why?
-To avoid using jQuery every time to look up the element in the DOM you should cache your selectors.
+* It avoids querying the DOM for the element everytime want to use it, which greatly improves performance.
+* You can use descriptive variable names which convey more meaning.
 
 ### How?
 ``` javascript
 // Bad
-$('[my-element]').addClass('is-active');
-$('[my-element]').on('click', function() {
-  // ...
-});
+$('button').addClass('is-active');
+$('button').on('click', function(event) {});
 
 // Good
-var $myElement = $('[my-element]');
-$myElement.addClass('is-active');
-$myElement.on('click', function() {
-  // ...
-});
+var $button = $('button');
+$button.addClass('is-active');
+$button.on('click', function(event) {});
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
