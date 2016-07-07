@@ -53,7 +53,7 @@ $myElement.addClass('is-animating');
 ```
 
 ``` css
-// vendor prefix might be required
+/* vendor prefix might be required */
 .is-animating {
     animation: fade 2s infinite;
 }
