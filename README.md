@@ -16,45 +16,27 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 ## Table of Contents
 
 * [About jQuery](#about-jquery)
-* [Avoid using `.click()`, `.change()`, et al as event handlers]
+* [Use .on() for event binding](#use-on-for-event-binding)
 
 ## About jQuery
 
 [jQuery](http://jquery.com/) is a utility library for easy DOM access & manipulation, event handling, Ajax and more. By using jQuery you can write consise and expressive code which works across modern and legacy browsers. jQuery has extensive tests, detailed documentation, a large active community and an ecosystem of plugins.
 
-## Avoid using `.click()`, `.change()`, et al as event handlers
-### Why?
-Using the .on() method instead can reduce memory usage and works on dynamically added elements.
+## Use [.on()](http://api.jquery.com/on/) for event binding
 
-Events added with .on() can also be namespaced. This make code easier to read and when removing the event you are sure you are not accidentally removing other event handlers.
+Methods like [`.click()`](http://api.jquery.com/click/) or [`.change()`](http://api.jquery.com/change/) are just alias for `.on('click')` and `.on('change')`. 
+
+### Why?
+Using the [.on()](http://api.jquery.com/on/) method instead can reduce memory usage and works on dynamically added elements.
 
 ### How?
 ``` javascript
 // Bad
-$('.todo-item').click(function(event) {
-  // ...
-});
+$('.todo-item').click(function(event) {});
 
 // Good
-$('.todo-item').on('click', function() {
-  // ...
-});
+$('.todo-item').on('click', function() {});
 
-// Better
-$('.todo-list').on('click', '.todo-item', function(event) {
-  // ...
-});
-```
-
-Using namespaced event handlers
-``` javascript
-// Adding namespaced event
-$('.todo-item').on('click.todoItem', function(event) {
-  // ...
-});
-
-// Remove namespaced event
-$('.todo-item').off('click.todoItem');
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
