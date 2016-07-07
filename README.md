@@ -21,6 +21,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Avoid `.ready()`](#avoid-ready)
 * [Assign `jQuery` to `$`](#assign-jquery-to-)
 * [Avoid `.show()`, `.hide()` and `.toggle()`](#avoid-show-hide-and-toggle)
+* [Use `.first()` for single element](#use-first-for-single-element)
 
 
 ## About jQuery
@@ -219,5 +220,22 @@ function toggleHidden(element) {
 	}
 }
 ```
+[↑ back to Table of Contents](#table-of-contents)
+
+## Use `.first()` for single element
+
+### Why?
+jQuery always returns a collection when using `$(selector)` or `$root.find(selector)`, while sometimes you are only interested in / only expect one element. In vanilla JS you would use `.querySelector(selector)` instead of `.querySelectorAll(selector)`. For clarity you should use [`.first()`](http://api.jquery.com/first/).
+
+### How?
+
+```javascript
+// collection of buttons:
+$buttons = $form.find('button');
+// versus just a single button:
+$submitButton = $form.find('[type="submit"]').first();
+```
+
+Naturally variable names should also reflect this. So plural for collections (`$buttons`), singular for a individual element (`$button`).
 
 [↑ back to Table of Contents](#table-of-contents)
