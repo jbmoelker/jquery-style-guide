@@ -26,8 +26,10 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 ### Why?
 * Always try to create a selector that is exactly specific enough for your case. Make sure you don't depend on a specific HTML structure.
 * Creating good selectors makes your HTML more flexible.
+* Querying on a specific element is faster than the whole document. This is really easy with module based development.
 
 ### How?
+
 ``` javascript
 /* avoid: overly specific */
 var $amount = $('[data-table] [data-table-stats] [data-table-amount]');
@@ -35,5 +37,7 @@ var $amount = $('[data-table] [data-table-stats] [data-table-amount]');
 /* recommended: using `.find()` which is highly optimised on the parent element */
 var $amount = $('[data-table]').find('[data-table-amount]');
 ```
+
+.
 
 [↑ back to Table of Contents](#table-of-contents)
