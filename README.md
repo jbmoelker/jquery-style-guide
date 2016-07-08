@@ -31,19 +31,17 @@ Promises can also be passed around so other modules can chain (.then) onto it, i
 
 ### How?
 ``` javascript
-// bad
+/* avoid: callbacks */
 $.ajax('example.com/articles/1/author', {
   success: function(response) {},
   error: function(err) {}
 });
 
-// good
+/* recommended: use promise */
 var request = $.ajax('example.com/articles/1/author');
 request.then(function(response) {});
 request.catch(function(err) {});
 
-// ES6
-request.catch((err) => {});
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
