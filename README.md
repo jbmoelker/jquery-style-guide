@@ -41,7 +41,6 @@ $.ajax('example.com/articles/1/author', {
 var request = $.ajax('example.com/articles/1/author');
 request.then(function(response) {});
 request.catch(function(err) {});
-
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
