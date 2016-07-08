@@ -24,18 +24,20 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 
 ## Avoid using `.css()`
 jQuery can get and set styling directly on an element with the [`.css()`](https://api.jquery.com/css/) method.
-When using `.css()` to set CSS it will set the styles inline and you are mixing concerns (styling and logic).
+When using `.css()` to set CSS it will set the styles inline and you will be mixing concerns (styling and logic).
 
 ### Why?
 * By toggling classes the same thing can be accomplished.
 * Separation of concerns, don't mix CSS with JavaScript.
-* When the `.css()` method is not used it can be omitted when creating a custom jQuery build.
+* When the `.css()` method is not used it can be omitted when creating a custom jQuery build. This reduces file size.
 
 ### How?
 ``` javascript
 /* avoid: mixing JavaScript and CSS */
 $('[my-element]').css('border', '1px solid green');
+```
 
+``` javascript
 /* recommended: using a class */
 $('[my-element]').addClass('is-active');
 ```
