@@ -17,6 +17,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 
 * [About jQuery](#about-jquery)
 * [Use .on() for event binding](#use-on-for-event-binding)
+* [Avoid using `.css()`](#avoid-using-css)
 * [Prefer CSS animations over .animate()](#prefer-css-animations-over-animate)
 * [Consider native browser features](#consider-native-browser-features)
 * [Consider lightweight alternative](#consider-lightweight-alternative)
@@ -28,6 +29,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 ## About jQuery
 
 [jQuery](http://jquery.com/) is a utility library for easy DOM access & manipulation, event handling, Ajax and more. By using jQuery you can write consise and expressive code which works across modern and legacy browsers. jQuery has extensive tests, detailed documentation, a large active community and an ecosystem of plugins.
+
 
 ## Use [.on()](http://api.jquery.com/on/) for event binding
 
@@ -47,6 +49,33 @@ $('.todo-item').click(function(event) {});
 
 /* recommended: .on() */
 $('.todo-item').on('click', function() {});
+```
+
+[↑ back to Table of Contents](#table-of-contents)
+
+## Avoid using `.css()`
+jQuery can get and set styling directly on an element with the [`.css()`](https://api.jquery.com/css/) method.
+When using `.css()` to set CSS it will set the styles inline and you will be mixing concerns (styling and logic).
+
+### Why?
+* By toggling classes the same thing can be accomplished.
+* Separation of concerns, don't mix CSS with JavaScript.
+* When the `.css()` method is not used it can be omitted when creating a custom jQuery build. This reduces file size.
+
+### How?
+``` javascript
+/* avoid: mixing JavaScript and CSS */
+$('[my-element]').css('border', '1px solid green');
+```
+
+``` javascript
+/* recommended: using a class */
+$('[my-element]').addClass('is-active');
+```
+
+``` css
+/* CSS */
+.is-active { border: 1px solid green; }
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
