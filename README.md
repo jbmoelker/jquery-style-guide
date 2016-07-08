@@ -27,14 +27,18 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 Methods like [`.click()`](http://api.jquery.com/click/) or [`.change()`](http://api.jquery.com/change/) are just alias for `.on('click')` and `.on('change')`. 
 
 ### Why?
-Using the [.on()](http://api.jquery.com/on/) method instead can reduce memory usage and works on dynamically added elements.
+
+* It's a way to keep consistency as all your events have the same signature.
+* Avoiding using aliases let you trim the jQuery custom build. That way you reduce load/parse times and the file size.
+ 
 
 ### How?
 ``` javascript
-// Bad
+
+/* avoid: .click() */
 $('.todo-item').click(function(event) {});
 
-// Good
+/* recommended: .on() */
 $('.todo-item').on('click', function() {});
 
 ```
