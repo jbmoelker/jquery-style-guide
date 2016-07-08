@@ -33,7 +33,7 @@ For simple animations use a CSS transition:
 
 ``` javascript
 /* avoid: jquery animate */
-$myElement.animate({ left: 20px }, 1000);
+$myElement.animate({ left: '20px' }, 1000);
 ```
 
 ```javascript
@@ -42,8 +42,8 @@ $myElement.addClass('is-active');
 ```
 
 ``` css
-/* vendor prefix might be required */
 .is-active {
+	left: 20px;
 	transition: left 1000ms;
 }
 ```
