@@ -16,6 +16,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 ## Table of Contents
 
 * [About jQuery](#about-jquery)
+* [Use .on() for event binding](#use-on-for-event-binding)
 * [Consider native browser features](#consider-native-browser-features)
 * [Consider lightweight alternative](#consider-lightweight-alternative)
 * [Avoid `.ready()`](#avoid-ready)
@@ -26,6 +27,28 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 ## About jQuery
 
 [jQuery](http://jquery.com/) is a utility library for easy DOM access & manipulation, event handling, Ajax and more. By using jQuery you can write consise and expressive code which works across modern and legacy browsers. jQuery has extensive tests, detailed documentation, a large active community and an ecosystem of plugins.
+
+## Use [.on()](http://api.jquery.com/on/) for event binding
+
+Methods like [`.click()`](http://api.jquery.com/click/) or [`.change()`](http://api.jquery.com/change/) are just alias for `.on('click')` and `.on('change')`. 
+
+### Why?
+
+* It's a way to keep consistency as all your events have the same signature.
+* Avoiding using aliases let you trim the jQuery custom build. That way you reduce load/parse times and the file size.
+ 
+
+### How?
+
+``` javascript
+/* avoid: .click() */
+$('.todo-item').click(function(event) {});
+
+/* recommended: .on() */
+$('.todo-item').on('click', function() {});
+```
+
+[↑ back to Table of Contents](#table-of-contents)
 
 ## Consider native browser features
 
@@ -229,6 +252,7 @@ Use promises instead of callbacks to keep code more readable and future proof wh
 Promises can also be passed around so other modules can chain (.then) onto it, instead of complex callbacks inside callbacks (pyramid of doom) structures.
 
 ### How?
+
 ``` javascript
 /* avoid: callbacks */
 $.ajax('example.com/articles/1/author', {
