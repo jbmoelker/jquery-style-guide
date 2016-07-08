@@ -17,6 +17,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 
 * [About jQuery](#about-jquery)
 * [Use .on() for event binding](#use-on-for-event-binding)
+* [Prefer CSS animations over .animate()](#prefer-css-animations-over-animate)
 * [Consider native browser features](#consider-native-browser-features)
 * [Consider lightweight alternative](#consider-lightweight-alternative)
 * [Avoid `.ready()`](#avoid-ready)
@@ -49,6 +50,65 @@ $('.todo-item').on('click', function() {});
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
+
+## Prefer CSS animations over [.animate()](http://api.jquery.com/animate/)
+
+### Why?
+Most of the time the same can be accomplished with toggling classes and using CSS [transition](https://developer.mozilla.org/en-US/docs/Web/CSS/transition) and/or [keyframes animations](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes).
+
+### How?
+
+For simple animations use a CSS transition:
+
+``` javascript
+/* avoid: jquery animate */
+$myElement.animate({ left: '20px' }, 1000);
+```
+
+```javascript
+/* recommended: css animations */
+$myElement.addClass('is-active');
+```
+
+``` css
+.is-active {
+	left: 20px;
+	transition: left 1000ms;
+}
+```
+
+For more complex animations use a CSS keyframe animation:
+
+``` javascript
+/* avoid: jquery animate */
+function blink() {
+  $myElement
+  	.animate({ opacity: 0 }, 1000)
+    .animate({ opacity: 1 }, 1000, blink);
+}
+blink();
+```
+
+```javascript
+/* recommended: css animations */
+$myElement.addClass('is-blinking');
+```
+
+``` css
+/* vendor prefix might be required */
+.is-blinking {
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+	0%   { opacity: 1; }
+	50%  { opacity: 0; }
+	100% { opacity: 1; }
+}
+```
+
+[↑ back to Table of Contents](#table-of-contents)
+
 
 ## Consider native browser features
 
@@ -243,6 +303,7 @@ function toggleHidden(element) {
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
+
 
 ## Prefer promises over callbacks
 A Promise represents a proxy for a value not necessarily known when the promise is created. It allows you to associate handlers to an asynchronous action's eventual success value or failure reason.
