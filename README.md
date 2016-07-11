@@ -347,9 +347,10 @@ To make it clear for other developers of you intention of just using one element
 ### How?
 
 ```javascript
-// collection of buttons (querySelectorAll);
+/* collection of buttons (querySelectorAll) */
 $buttons = $form.find('button');
-// versus just a single button (querySelector)
+
+/* versus just a single button (querySelector) */
 $submitButton = $form.find('[type="submit"]').first();
 ```
 
