@@ -19,7 +19,8 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Consider native browser features](#consider-native-browser-features)
 * [Consider lightweight alternative](#consider-lightweight-alternative)
 * [Avoid `.ready()`](#avoid-ready)
-* [Assign `jQuery` to `$`](#assign-jquery-to-)
+* [Assign `jQuery` to `$`](#assign-jquery-to)
+* [Cache jQuery lookups](#cache-jquery-lookups)
 * [Use `.on()` for event binding](#use-on-for-event-binding)
 * [Avoid `.show()`, `.hide()` and `.toggle()`](#avoid-show-hide-and-toggle)
 * [Avoid using `.css()`](#avoid-using-css)
@@ -140,6 +141,27 @@ const $ = require('jquery');
 (function($){
 	// use jQuery as $
 }(jQuery));
+```
+
+[↑ back to Table of Contents](#table-of-contents)
+
+## Cache jQuery lookups
+
+Every call to `$(element}` asks jQuery to rescan for the matching element, wrap it in a jQuery object, and create a new instance of something you already have in memory. This is something avoidable if you already did it once.
+
+### Why?
+* It avoids querying the DOM for the element everytime want to use it, which greatly improves performance.
+* You can use descriptive variable names which convey more meaning.
+
+```javascript
+/* avoid: repeating jQuery lookups */
+$('button').addClass('is-active');
+$('button').on('click', function(event) {});
+
+/* recommended: cache jQuery lookup in variable */
+var $button = $('button');
+$button.addClass('is-active');
+$button.on('click', function(event) {});
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
