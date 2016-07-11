@@ -150,6 +150,7 @@ Methods like [`.click()`](http://api.jquery.com/click/) or [`.change()`](http://
 
 ### Why?
 
+* `.on()` supports [event delegation](http://api.jquery.com/on/#direct-and-delegated-events) resulting in more flexibility and better performance.
 * It's a way to keep consistency as all your events have the same signature.
 * Avoiding using aliases let you trim the jQuery custom build. That way you reduce load/parse times and the file size.
 
