@@ -24,6 +24,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Avoid `.show()`, `.hide()` and `.toggle()`](#avoid-show-hide-and-toggle)
 * [Avoid using `.css()`](#avoid-using-css)
 * [Prefer CSS animations over `.animate()`](#prefer-css-animations-over-animate)
+* [Prefer native array methods](#prefer-native-array-methods)
 * [Prefer promises over callbacks](#prefer-promises-over-callbacks)
 
 ## About jQuery
@@ -332,6 +333,36 @@ $myElement.addClass('is-blinking');
 	50%  { opacity: 0; }
 	100% { opacity: 1; }
 }
+```
+
+[↑ back to Table of Contents](#table-of-contents)
+
+## Prefer native array methods
+### Why?
+
+jQuery’s array methods are non-standard, they use the signature `index, item/element` while native uses `item/element, index`
+
+### How?
+
+Make sure you check if you browser scope [supports native array methods](http://kangax.github.io/compat-table/es5/) and then use [`.get()`](http://api.jquery.com/get/) to get a native array of HTML elements, which you can loop, map or filter.
+
+``` javascript
+
+/* avoid: jquery */
+$elements.map((index, el) => /* ... */)
+
+/* recomended: native methods */
+$elements.get().map(el => /* ... */)
+``` 
+
+Also with regular arrays:
+
+```javascript
+/* avoid: jquery */
+$.map(array, (index, item) => /* ... */)
+
+/* prefer: native array methods */
+array.map(item => /* ... */)
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
