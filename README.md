@@ -21,12 +21,12 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Avoid `.ready()`](#avoid-ready)
 * [Assign `jQuery` to `$`](#assign-jquery-to)
 * [Cache jQuery lookups](#cache-jquery-lookups)
+* [Use `.first()` for single element](#use-first-for-single-element)
 * [Use `.on()` for event binding](#use-on-for-event-binding)
 * [Avoid `.show()`, `.hide()` and `.toggle()`](#avoid-show-hide-and-toggle)
 * [Avoid using `.css()`](#avoid-using-css)
 * [Prefer CSS animations over `.animate()`](#prefer-css-animations-over-animate)
 * [Prefer native array methods](#prefer-native-array-methods)
-* [Use `.first()` for single element](#use-first-for-single-element)
 * [Prefer promises over callbacks](#prefer-promises-over-callbacks)
 
 ## About jQuery
@@ -164,6 +164,28 @@ var $button = $('button');
 $button.addClass('is-active');
 $button.on('click', function(event) {});
 ```
+
+[↑ back to Table of Contents](#table-of-contents)
+
+
+## Use `.first()` for single element
+
+jQuery always returns a collection when using `$(selector)`, while sometimes you are only interested in / only expect one element. In vanilla JS you would use `.querySelector(selector)` instead of `.querySelectorAll(selector)`.
+
+### Why?
+To make it clear for other developers of you intention of just using one element
+
+### How?
+
+```javascript
+/* collection of buttons (akin querySelectorAll) */
+$buttons = $form.find('button');
+
+/* versus just a single button (akin querySelector) */
+$submitButton = $form.find('[type="submit"]').first();
+```
+
+Naturally variable names should also reflect this. So plural for collections (`$buttons`), singular for a individual element (`$button`).
 
 [↑ back to Table of Contents](#table-of-contents)
 
@@ -376,27 +398,6 @@ $elements.map((index, el) => /* ... */)
 /* recommended: use native methods */
 $elements.get().map(el => /* ... */)
 ```
-[↑ back to Table of Contents](#table-of-contents)
-
-## Use `.first()` for single element
-
-jQuery always returns a collection when using `$(selector)`, while sometimes you are only interested in / only expect one element. In vanilla JS you would use `.querySelector(selector)` instead of `.querySelectorAll(selector)`.
-
-### Why?
-To make it clear for other developers of you intention of just using one element
-
-### How?
-
-```javascript
-/* collection of buttons (akin querySelectorAll) */
-$buttons = $form.find('button');
-
-/* versus just a single button (akin querySelector) */
-$submitButton = $form.find('[type="submit"]').first();
-```
-
-Naturally variable names should also reflect this. So plural for collections (`$buttons`), singular for a individual element (`$button`).
-
 [↑ back to Table of Contents](#table-of-contents)
 
 
