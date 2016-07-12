@@ -19,12 +19,14 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Consider native browser features](#consider-native-browser-features)
 * [Consider lightweight alternative](#consider-lightweight-alternative)
 * [Avoid `.ready()`](#avoid-ready)
-* [Assign `jQuery` to `$`](#assign-jquery-to-)
+* [Assign `jQuery` to `$`](#assign-jquery-to)
+* [Cache jQuery lookups](#cache-jquery-lookups)
 * [Use `.on()` for event binding](#use-on-for-event-binding)
 * [Avoid `.show()`, `.hide()` and `.toggle()`](#avoid-show-hide-and-toggle)
 * [Avoid using `.css()`](#avoid-using-css)
 * [Prefer CSS animations over `.animate()`](#prefer-css-animations-over-animate)
 * [Prefer native array methods](#prefer-native-array-methods)
+* [Use `.first()` for single element](#use-first-for-single-element)
 * [Prefer promises over callbacks](#prefer-promises-over-callbacks)
 
 ## About jQuery
@@ -144,6 +146,27 @@ const $ = require('jquery');
 
 [↑ back to Table of Contents](#table-of-contents)
 
+## Cache jQuery lookups
+
+Every call to `$(element}` asks jQuery to rescan for the matching element, wrap it in a jQuery object, and create a new instance of something you already have in memory. This is something avoidable if you already did it once.
+
+### Why?
+* It avoids querying the DOM for the element everytime want to use it, which greatly improves performance.
+* You can use descriptive variable names which convey more meaning.
+
+```javascript
+/* avoid: repeating jQuery lookups */
+$('button').addClass('is-active');
+$('button').on('click', function(event) {});
+
+/* recommended: cache jQuery lookup in variable */
+var $button = $('button');
+$button.addClass('is-active');
+$button.on('click', function(event) {});
+```
+
+[↑ back to Table of Contents](#table-of-contents)
+
 
 ## Use [.on()](http://api.jquery.com/on/) for event binding
 
@@ -246,7 +269,6 @@ function toggleHidden(element) {
 	}
 }
 ```
-
 [↑ back to Table of Contents](#table-of-contents)
 
 
@@ -337,7 +359,6 @@ $myElement.addClass('is-blinking');
 
 [↑ back to Table of Contents](#table-of-contents)
 
-
 ## Prefer native Array methods
 
 ### Why?
@@ -355,6 +376,26 @@ $elements.map((index, el) => /* ... */)
 /* recommended: use native methods */
 $elements.get().map(el => /* ... */)
 ```
+[↑ back to Table of Contents](#table-of-contents)
+
+## Use `.first()` for single element
+
+jQuery always returns a collection when using `$(selector)`, while sometimes you are only interested in / only expect one element. In vanilla JS you would use `.querySelector(selector)` instead of `.querySelectorAll(selector)`.
+
+### Why?
+To make it clear for other developers of you intention of just using one element
+
+### How?
+
+```javascript
+/* collection of buttons (akin querySelectorAll) */
+$buttons = $form.find('button');
+
+/* versus just a single button (akin querySelector) */
+$submitButton = $form.find('[type="submit"]').first();
+```
+
+Naturally variable names should also reflect this. So plural for collections (`$buttons`), singular for a individual element (`$button`).
 
 [↑ back to Table of Contents](#table-of-contents)
 
