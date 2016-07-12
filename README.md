@@ -369,10 +369,10 @@ To make it clear for other developers of you intention of just using one element
 ### How?
 
 ```javascript
-/* collection of buttons (querySelectorAll) */
+/* collection of buttons (akin querySelectorAll) */
 $buttons = $form.find('button');
 
-/* versus just a single button (querySelector) */
+/* versus just a single button (akin querySelector) */
 $submitButton = $form.find('[type="submit"]').first();
 ```
 
