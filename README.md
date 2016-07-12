@@ -25,6 +25,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Avoid `.show()`, `.hide()` and `.toggle()`](#avoid-show-hide-and-toggle)
 * [Avoid using `.css()`](#avoid-using-css)
 * [Prefer CSS animations over `.animate()`](#prefer-css-animations-over-animate)
+* [Prefer native array methods](#prefer-native-array-methods)
 * [Use `.first()` for single element](#use-first-for-single-element)
 * [Prefer promises over callbacks](#prefer-promises-over-callbacks)
 
@@ -358,6 +359,24 @@ $myElement.addClass('is-blinking');
 
 [↑ back to Table of Contents](#table-of-contents)
 
+## Prefer native Array methods
+
+### Why?
+
+jQuery’s array methods are non-standard. They use the signature `(index, item/element)` while native uses `(item/element, index)`.
+
+### How?
+
+Make sure you check your browser scope [supports native array methods](http://kangax.github.io/compat-table/es5/). Then use [`.get()`](http://api.jquery.com/get/) to get a native array of HTML elements. Use [native array methods](https://dev.opera.com/articles/javascript-array-extras-in-detail/), like `forEach`, `map`, `filter` and `reduce` to process the elements:
+
+``` javascript
+/* avoid: jQuery array methods */
+$elements.map((index, el) => /* ... */)
+
+/* recommended: use native methods */
+$elements.get().map(el => /* ... */)
+```
+[↑ back to Table of Contents](#table-of-contents)
 
 ## Use `.first()` for single element
 
@@ -382,9 +401,11 @@ Naturally variable names should also reflect this. So plural for collections (`$
 
 
 ## Prefer promises over callbacks
+
 A Promise represents a proxy for a value not necessarily known when the promise is created. It allows you to associate handlers to an asynchronous action's eventual success value or failure reason.
 
 ### Why?
+
 Use promises instead of callbacks to keep code more readable and future proof when handling asynchronous requests.
 Promises can also be passed around so other modules can chain (.then) onto it, instead of complex callbacks inside callbacks (pyramid of doom) structures.
 
