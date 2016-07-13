@@ -28,6 +28,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Prefer CSS animations over `.animate()`](#prefer-css-animations-over-animate)
 * [Prefer native array methods](#prefer-native-array-methods)
 * [Prefer promises over callbacks](#prefer-promises-over-callbacks)
+* [Lint your script files](#lint-your-script-files)
 
 ## About jQuery
 
@@ -424,6 +425,39 @@ var request = $.ajax('example.com/articles/1/author');
 request.then(function(response) {});
 request.catch(function(err) {});
 ```
+
+[↑ back to Table of Contents](#table-of-contents)
+
+## Lint your script files
+
+### Why?
+
+* Linting files ensures all developers use the same code style.
+* Linting files helps you trace syntax errors before it's too late.
+
+## How?
+
+You can use default configurations or your custom definitions but remember to add jQuery global variables.
+
+### ESLint
+
+	{
+		"env": {
+			"browser": true
+		},
+		"globals": {
+			"jQuery": true,
+			"$": true
+		}
+	}
+
+### JSHint
+
+	{
+		"jquery": true,
+		"browser": true
+	}
+
 
 [↑ back to Table of Contents](#table-of-contents)
 
