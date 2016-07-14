@@ -21,6 +21,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Avoid `.ready()`](#avoid-ready)
 * [Assign `jQuery` to `$`](#assign-jquery-to)
 * [Cache jQuery lookups](#cache-jquery-lookups)
+* [Optimise selectors for performance](#optimise-selectors-for-performance)
 * [Use `.first()` for single element](#use-first-for-single-element)
 * [Use `.on()` for event binding](#use-on-for-event-binding)
 * [Avoid `.show()`, `.hide()` and `.toggle()`](#avoid-show-hide-and-toggle)
@@ -28,6 +29,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Prefer CSS animations over `.animate()`](#prefer-css-animations-over-animate)
 * [Prefer native array methods](#prefer-native-array-methods)
 * [Prefer promises over callbacks](#prefer-promises-over-callbacks)
+
 
 ## About jQuery
 
@@ -163,6 +165,29 @@ $('button').on('click', function(event) {});
 var $button = $('button');
 $button.addClass('is-active');
 $button.on('click', function(event) {});
+```
+
+[↑ back to Table of Contents](#table-of-contents)
+
+
+## Optimise selectors for performance
+
+### Why?
+* Always try to create a selector that is exactly specific enough for your case. Make sure you don't depend on a specific HTML structure.
+* Creating good selectors makes your HTML more flexible.
+* Querying on a specific element is faster than the whole document. This is really easy with module based development.
+
+### How?
+
+``` javascript
+/* avoid: overly specific */
+var $amount = $('[data-table] [data-table-amount]');
+var $percentage = $('[data-table] [data-table-percentage]');
+
+/* recommended: using `.find()` which is highly optimised on the parent element */
+var $table = $('[data-table');
+var $amount = $table.find('[data-table-amount]');
+var $percentage = $table.find('[data-table-percentage]');
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
