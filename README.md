@@ -23,6 +23,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 [jQuery](http://jquery.com/) is a utility library for easy DOM access & manipulation, event handling, Ajax and more. By using jQuery you can write consise and expressive code which works across modern and legacy browsers. jQuery has extensive tests, detailed documentation, a large active community and an ecosystem of plugins.
 
 ## Optimise selectors for performance
+
 ### Why?
 * Always try to create a selector that is exactly specific enough for your case. Make sure you don't depend on a specific HTML structure.
 * Creating good selectors makes your HTML more flexible.
@@ -32,12 +33,13 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 
 ``` javascript
 /* avoid: overly specific */
-var $amount = $('[data-table] [data-table-stats] [data-table-amount]');
+var $amount = $('[data-table] [data-table-amount]');
+var $percentage = $('[data-table] [data-table-percentage]');
 
 /* recommended: using `.find()` which is highly optimised on the parent element */
-var $amount = $('[data-table]').find('[data-table-amount]');
+var $table = $('[data-table');
+var $amount = $table.find('[data-table-amount]');
+var $percentage = $table.find('[data-table-percentage]');
 ```
-
-.
 
 [↑ back to Table of Contents](#table-of-contents)
