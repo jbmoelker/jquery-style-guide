@@ -23,6 +23,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Cache jQuery lookups](#cache-jquery-lookups)
 * [Use `.first()` for single element](#use-first-for-single-element)
 * [Use `.on()` for event binding](#use-on-for-event-binding)
+* [Use delegated events](#use-delegated-events)
 * [Avoid `.show()`, `.hide()` and `.toggle()`](#avoid-show-hide-and-toggle)
 * [Avoid using `.css()`](#avoid-using-css)
 * [Prefer CSS animations over `.animate()`](#prefer-css-animations-over-animate)
@@ -208,6 +209,28 @@ $('.todo-item').click(function(event) {});
 
 /* recommended: .on() */
 $('.todo-item').on('click', function() {});
+```
+
+[↑ back to Table of Contents](#table-of-contents)
+
+
+## Use delegated events
+
+When a selector is provided, the event handler is referred to as delegated. jQuery bubbles the event from the event target up to the element where the handler is attached and runs the handler for any elements along that path matching the selector.
+
+### Why?
+
+* Using delegated events allows for events to be processed even to elements added to the document later
+* Keeps the scope of the event *bubling* shorter and thus performant.
+
+### How?
+
+``` javascript
+/* avoid */
+$('button').on('click', function() {});
+
+/* recommended: define a parent element */
+$('button').on('click', '[element]' function() {});
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
