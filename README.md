@@ -229,10 +229,10 @@ Methods like [`.click()`](http://api.jquery.com/click/) or [`.change()`](http://
 
 ``` javascript
 /* avoid: .click() */
-$('.todo-item').click(function(event) {});
+$button.click(function(event) {});
 
 /* recommended: .on() */
-$('.todo-item').on('click', function() {});
+$button.on('click', function() {});
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
@@ -332,12 +332,12 @@ When using `.css()` to set CSS it will set the styles inline and you will be mix
 ### How?
 ``` javascript
 /* avoid: mixing JavaScript and CSS */
-$('[my-element]').css('border', '1px solid green');
+$element.css('border', '1px solid green');
 ```
 
 ``` javascript
 /* recommended: using a class */
-$('[my-element]').addClass('is-active');
+$element.addClass('is-active');
 ```
 
 ``` css
@@ -359,12 +359,12 @@ For simple animations use a CSS transition:
 
 ``` javascript
 /* avoid: jquery animate */
-$myElement.animate({ left: '20px' }, 1000);
+$element.animate({ left: '20px' }, 1000);
 ```
 
 ```javascript
 /* recommended: css animations */
-$myElement.addClass('is-active');
+$element.addClass('is-active');
 ```
 
 ``` css
@@ -379,7 +379,7 @@ For more complex animations use a CSS keyframe animation:
 ``` javascript
 /* avoid: jquery animate */
 function blink() {
-  $myElement
+  $element
   	.animate({ opacity: 0 }, 1000)
     .animate({ opacity: 1 }, 1000, blink);
 }
@@ -388,7 +388,7 @@ blink();
 
 ```javascript
 /* recommended: css animations */
-$myElement.addClass('is-blinking');
+$element.addClass('is-blinking');
 ```
 
 ``` css
