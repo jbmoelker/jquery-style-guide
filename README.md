@@ -359,7 +359,7 @@ For simple animations use a CSS transition:
 
 ``` javascript
 /* avoid: jquery animate */
-$element.animate({ left: '20px' }, 1000);
+$element.animate({ left: '10px' }, 150, easeOut);
 ```
 
 ```javascript
@@ -369,8 +369,8 @@ $element.addClass('is-active');
 
 ``` css
 .is-active {
-	left: 20px;
-	transition: left 1000ms;
+	transform: translate(10px);
+	transition: transform 150ms ease-out;
 }
 ```
 
