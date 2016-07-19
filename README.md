@@ -428,38 +428,45 @@ request.catch(function(err) {});
 
 [↑ back to Table of Contents](#table-of-contents)
 
+
 ## Lint your script files
+
+Linters like [ESLint](http://eslint.org/) and [JSHint](http://jshint.com/) improve code consistency and help trace syntax errors.
 
 ### Why?
 
 * Linting files ensures all developers use the same code style.
 * Linting files helps you trace syntax errors before it's too late.
 
-## How?
+### How?
 
-You can use default configurations or your custom definitions but remember to add jQuery global variables.
+Configure your linter to accept jQuery and `$` as global variable.
 
-### ESLint
+#### ESLint
 
-	{
-		"env": {
-			"browser": true
-		},
-		"globals": {
-			"jQuery": true,
-			"$": true
-		}
-	}
-
-### JSHint
-
-	{
-		"jquery": true,
+```json
+{
+	"env": {
 		"browser": true
+	},
+	"globals": {
+		"jQuery": true,
+		"$": true
 	}
+}
+```
 
+#### JSHint
+
+```json
+{
+	"jquery": true,
+	"browser": true
+}
+```
 
 [↑ back to Table of Contents](#table-of-contents)
+
 
 ---
 
