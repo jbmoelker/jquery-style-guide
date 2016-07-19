@@ -20,15 +20,19 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Consider lightweight alternative](#consider-lightweight-alternative)
 * [Create a smaller build](#create-a-smaller-build)
 * [Avoid `.ready()`](#avoid-ready)
-* [Assign `jQuery` to `$`](#assign-jquery-to)
+* [Assign `jQuery` to `$`](#assign-jquery-to-)
 * [Cache jQuery lookups](#cache-jquery-lookups)
+* [Optimise selectors for performance](#optimise-selectors-for-performance)
 * [Use `.first()` for single element](#use-first-for-single-element)
 * [Use `.on()` for event binding](#use-on-for-event-binding)
+* [Use event delegation](#use-event-delegation)
 * [Avoid `.show()`, `.hide()` and `.toggle()`](#avoid-show-hide-and-toggle)
 * [Avoid using `.css()`](#avoid-using-css)
 * [Prefer CSS animations over `.animate()`](#prefer-css-animations-over-animate)
 * [Prefer native array methods](#prefer-native-array-methods)
 * [Prefer promises over callbacks](#prefer-promises-over-callbacks)
+* [Lint your script files](#lint-your-script-files)
+
 
 ## About jQuery
 
@@ -194,6 +198,29 @@ $button.on('click', function(event) {});
 [↑ back to Table of Contents](#table-of-contents)
 
 
+## Optimise selectors for performance
+
+### Why?
+* Always try to create a selector that is exactly specific enough for your case. Make sure you don't depend on a specific HTML structure.
+* Creating good selectors makes your HTML more flexible.
+* Querying on a specific element is faster than the whole document. This is really easy with module based development.
+
+### How?
+
+``` javascript
+/* avoid: overly specific */
+var $amount = $('[data-table] [data-table-amount]');
+var $percentage = $('[data-table] [data-table-percentage]');
+
+/* recommended: using `.find()` which is highly optimised on the parent element */
+var $table = $('[data-table');
+var $amount = $table.find('[data-table-amount]');
+var $percentage = $table.find('[data-table-percentage]');
+```
+
+[↑ back to Table of Contents](#table-of-contents)
+
+
 ## Use `.first()` for single element
 
 jQuery always returns a collection when using `$(selector)`, while sometimes you are only interested in / only expect one element. In vanilla JS you would use `.querySelector(selector)` instead of `.querySelectorAll(selector)`.
@@ -230,10 +257,37 @@ Methods like [`.click()`](http://api.jquery.com/click/) or [`.change()`](http://
 
 ``` javascript
 /* avoid: .click() */
-$('.todo-item').click(function(event) {});
+$button.click(function(event) {});
 
 /* recommended: .on() */
-$('.todo-item').on('click', function() {});
+$button.on('click', function() {});
+```
+
+[↑ back to Table of Contents](#table-of-contents)
+
+
+## Use event delegation
+
+> When a selector is provided, the event handler is referred to as delegated. jQuery bubbles the event from the event target up to the element where the handler is attached and runs the handler for any elements along that path matching the selector.
+>
+> — [jQuery](http://api.jquery.com/on/#direct-and-delegated-events)
+
+### Why?
+
+* Using delegated events allows for events to be processed even to elements added to the document later
+* Keeps the scope of the event *bubling* shorter and thus performant.
+
+### How?
+
+```javascript
+$list = $('[todo-list']).first();
+$items = $list.find('[todo-item]');
+
+/* avoid: event listener on each item */
+$items.on('click', function(event) { /* ... */ });
+
+/* recommended: event delegation on list */
+$list.on('click', '[todo-item]', function(event) { /* ... */ });
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
@@ -333,12 +387,12 @@ When using `.css()` to set CSS it will set the styles inline and you will be mix
 ### How?
 ``` javascript
 /* avoid: mixing JavaScript and CSS */
-$('[my-element]').css('border', '1px solid green');
+$element.css('border', '1px solid green');
 ```
 
 ``` javascript
 /* recommended: using a class */
-$('[my-element]').addClass('is-active');
+$element.addClass('is-active');
 ```
 
 ``` css
@@ -349,38 +403,43 @@ $('[my-element]').addClass('is-active');
 [↑ back to Table of Contents](#table-of-contents)
 
 
-## Prefer CSS animations over [.animate()](http://api.jquery.com/animate/)
+## Prefer CSS animations over `.animate()`
+
+jQuery let's you create complex animation sequences using [.animate()](http://api.jquery.com/animate/). Since the introduction of jQuery native CSS has caught up and now also provides methods to transition and animate elements.
 
 ### Why?
-Most of the time the same can be accomplished with toggling classes and using CSS [transition](https://developer.mozilla.org/en-US/docs/Web/CSS/transition) and/or [keyframes animations](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes).
+
+* Defining animations in CSS separates presentation from (interaction) logic.
+* Native CSS transitions and animations can be hardware-accelerated (using GPU), resulting in smoother animations.
 
 ### How?
 
-For simple animations use a CSS transition:
+For simple animations use a [CSS transition](https://developer.mozilla.org/en-US/docs/Web/CSS/transition):
 
-``` javascript
+```javascript
 /* avoid: jquery animate */
-$myElement.animate({ left: '20px' }, 1000);
+$element.animate({ left: '50px' }, 150, 'easeout');
 ```
 
 ```javascript
 /* recommended: css animations */
-$myElement.addClass('is-active');
+$element.addClass('is-active');
 ```
 
-``` css
+```css
+/* vendor prefix might be required */
 .is-active {
-	left: 20px;
-	transition: left 1000ms;
+	transform: translate(50px);
+	transition: transform 150ms ease-out;
 }
 ```
 
-For more complex animations use a CSS keyframe animation:
+For more complex animations use a [CSS keyframes animation](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes):
 
-``` javascript
+```javascript
 /* avoid: jquery animate */
 function blink() {
-  $myElement
+  $element
   	.animate({ opacity: 0 }, 1000)
     .animate({ opacity: 1 }, 1000, blink);
 }
@@ -389,10 +448,10 @@ blink();
 
 ```javascript
 /* recommended: css animations */
-$myElement.addClass('is-blinking');
+$element.addClass('is-blinking');
 ```
 
-``` css
+```css
 /* vendor prefix might be required */
 .is-blinking {
     animation: blink 2s infinite;
@@ -406,6 +465,7 @@ $myElement.addClass('is-blinking');
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
+
 
 ## Prefer native Array methods
 
@@ -452,6 +512,46 @@ request.catch(function(err) {});
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
+
+
+## Lint your script files
+
+Linters like [ESLint](http://eslint.org/) and [JSHint](http://jshint.com/) improve code consistency and help trace syntax errors.
+
+### Why?
+
+* Linting files ensures all developers use the same code style.
+* Linting files helps you trace syntax errors before it's too late.
+
+### How?
+
+Configure your linter to accept jQuery and `$` as global variable.
+
+#### ESLint
+
+```json
+{
+	"env": {
+		"browser": true
+	},
+	"globals": {
+		"jQuery": true,
+		"$": true
+	}
+}
+```
+
+#### JSHint
+
+```json
+{
+	"jquery": true,
+	"browser": true
+}
+```
+
+[↑ back to Table of Contents](#table-of-contents)
+
 
 ---
 
