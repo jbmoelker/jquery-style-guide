@@ -18,7 +18,6 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [About jQuery](#about-jquery)
 * [Consider native browser features](#consider-native-browser-features)
 * [Consider lightweight alternative](#consider-lightweight-alternative)
-* [Create a smaller build](#create-a-smaller-build)
 * [Avoid `.ready()`](#avoid-ready)
 * [Assign `jQuery` to `$`](#assign-jquery-to-)
 * [Cache jQuery lookups](#cache-jquery-lookups)
@@ -32,6 +31,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Prefer native array methods](#prefer-native-array-methods)
 * [Prefer promises over callbacks](#prefer-promises-over-callbacks)
 * [Lint your script files](#lint-your-script-files)
+* [Create a smaller build](#create-a-smaller-build)
 
 
 ## About jQuery
@@ -73,31 +73,6 @@ jQuery is the swiss army knive for DOM and event handling and much more. While j
 
 * Use a lightweight alternative like [Dominus](https://github.com/bevacqua/dominus#readme), [Shoestring](https://github.com/filamentgroup/shoestring#readme) or [Zepto](https://github.com/madrobby/zepto#readme).
 * [Create a jQuery custom build](#create-a-jquery-custom-build) to only include the features you need.
-
-[↑ back to Table of Contents](#table-of-contents)
-
-
-## Create a smaller build
-
-### Why?
-
-> Special builds can be created that exclude subsets of jQuery functionality. This allows for smaller custom builds when the builder is certain that those parts of jQuery are not being used.
->
-> — [jQuery](https://github.com/jquery/jquery#modules)
-
-### How?
-
-After cloning jQuery from the [public repository](https://github.com/jquery/), run:
-
-	npm install
-
-An then: 
-
-	grunt custom:-css,-deprecated,-effects,-event/alias,-core/ready,-exports/amd,-css,-css/showHide
-
-This custom build is a example that reflects the guidelines presented. Following the guides saves you 17KB (6kb gziped) on your final jquery size.
-
-For more detailed information check the [public repository](https://github.com/jquery/jquery#modules) documentation.
 
 [↑ back to Table of Contents](#table-of-contents)
 
@@ -549,6 +524,31 @@ Configure your linter to accept jQuery and `$` as global variable.
 	"browser": true
 }
 ```
+
+[↑ back to Table of Contents](#table-of-contents)
+
+
+## Create a smaller build
+
+### Why?
+
+> Special builds can be created that exclude subsets of jQuery functionality. This allows for smaller custom builds when the builder is certain that those parts of jQuery are not being used.
+>
+> — [jQuery](https://github.com/jquery/jquery#modules)
+
+### How?
+
+After cloning jQuery from the [public repository](https://github.com/jquery/), run:
+
+	npm install
+
+An then: 
+
+	grunt custom:-css,-deprecated,-effects,-event/alias,-core/ready,-exports/amd,-css,-css/showHide
+
+This custom build is a example that reflects the guidelines presented. Following the guides saves you 17KB (6kb gziped) on your final jquery size.
+
+For more detailed information check the [public repository](https://github.com/jquery/jquery#modules) documentation.
 
 [↑ back to Table of Contents](#table-of-contents)
 
