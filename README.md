@@ -24,6 +24,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Optimise selectors for performance](#optimise-selectors-for-performance)
 * [Use `.first()` for single element](#use-first-for-single-element)
 * [Use `.on()` for event binding](#use-on-for-event-binding)
+* [Use event delegation](#use-event-delegation)
 * [Avoid `.show()`, `.hide()` and `.toggle()`](#avoid-show-hide-and-toggle)
 * [Avoid using `.css()`](#avoid-using-css)
 * [Prefer CSS animations over `.animate()`](#prefer-css-animations-over-animate)
@@ -234,6 +235,33 @@ $button.click(function(event) {});
 
 /* recommended: .on() */
 $button.on('click', function() {});
+```
+
+[↑ back to Table of Contents](#table-of-contents)
+
+
+## Use event delegation
+
+> When a selector is provided, the event handler is referred to as delegated. jQuery bubbles the event from the event target up to the element where the handler is attached and runs the handler for any elements along that path matching the selector.
+>
+> — [jQuery](http://api.jquery.com/on/#direct-and-delegated-events)
+
+### Why?
+
+* Using delegated events allows for events to be processed even to elements added to the document later
+* Keeps the scope of the event *bubling* shorter and thus performant.
+
+### How?
+
+```javascript
+$list = $('[todo-list']).first();
+$items = $list.find('[todo-item]');
+
+/* avoid: event listener on each item */
+$items.on('click', function(event) { /* ... */ });
+
+/* recommended: event delegation on list */
+$list.on('click', '[todo-item]', function(event) { /* ... */ });
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
