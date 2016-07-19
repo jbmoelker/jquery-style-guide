@@ -538,17 +538,13 @@ Configure your linter to accept jQuery and `$` as global variable.
 
 ### How?
 
-After cloning jQuery from the [public repository](https://github.com/jquery/), run:
+Follow the [official documention on creating a custom build](https://github.com/jquery/jquery#what-you-need-to-build-your-own-jquery) to get you setup.
 
-	npm install
+Then create your own custom build excluding [modules](https://github.com/jquery/jquery#modules) you don't need: 
 
-An then: 
+	grunt custom:-css,-css/showHide,-deprecated,-effects,-event/alias,-core/ready,-exports/amd
 
-	grunt custom:-css,-deprecated,-effects,-event/alias,-core/ready,-exports/amd,-css,-css/showHide
-
-This custom build is a example that reflects the guidelines presented. Following the guides saves you 17KB (6kb gziped) on your final jquery size.
-
-For more detailed information check the [public repository](https://github.com/jquery/jquery#modules) documentation.
+This custom build is an example that reflects the guidelines presented. Following this guide saves you 17KB (6kb gzipped) on your final jQuery size.
 
 [↑ back to Table of Contents](#table-of-contents)
 
