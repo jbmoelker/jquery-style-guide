@@ -29,6 +29,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Prefer CSS animations over `.animate()`](#prefer-css-animations-over-animate)
 * [Prefer native array methods](#prefer-native-array-methods)
 * [Prefer promises over callbacks](#prefer-promises-over-callbacks)
+* [Lint your script files](#lint-your-script-files)
 
 
 ## About jQuery
@@ -451,6 +452,46 @@ request.catch(function(err) {});
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
+
+
+## Lint your script files
+
+Linters like [ESLint](http://eslint.org/) and [JSHint](http://jshint.com/) improve code consistency and help trace syntax errors.
+
+### Why?
+
+* Linting files ensures all developers use the same code style.
+* Linting files helps you trace syntax errors before it's too late.
+
+### How?
+
+Configure your linter to accept jQuery and `$` as global variable.
+
+#### ESLint
+
+```json
+{
+	"env": {
+		"browser": true
+	},
+	"globals": {
+		"jQuery": true,
+		"$": true
+	}
+}
+```
+
+#### JSHint
+
+```json
+{
+	"jquery": true,
+	"browser": true
+}
+```
+
+[↑ back to Table of Contents](#table-of-contents)
+
 
 ---
 
