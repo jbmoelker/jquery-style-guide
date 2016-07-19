@@ -19,7 +19,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Consider native browser features](#consider-native-browser-features)
 * [Consider lightweight alternative](#consider-lightweight-alternative)
 * [Avoid `.ready()`](#avoid-ready)
-* [Assign `jQuery` to `$`](#assign-jquery-to)
+* [Assign `jQuery` to `$`](#assign-jquery-to-)
 * [Cache jQuery lookups](#cache-jquery-lookups)
 * [Optimise selectors for performance](#optimise-selectors-for-performance)
 * [Use `.first()` for single element](#use-first-for-single-element)
@@ -349,18 +349,22 @@ $element.addClass('is-active');
 [↑ back to Table of Contents](#table-of-contents)
 
 
-## Prefer CSS animations over [.animate()](http://api.jquery.com/animate/)
+## Prefer CSS animations over `.animate()`
+
+jQuery let's you create complex animation sequences using [.animate()](http://api.jquery.com/animate/). Since the introduction of jQuery native CSS has caught up and now also provides methods to transition and animate elements.
 
 ### Why?
-Most of the time the same can be accomplished with toggling classes and using CSS [transition](https://developer.mozilla.org/en-US/docs/Web/CSS/transition) and/or [keyframes animations](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes).
+
+* Defining animations in CSS separates presentation from (interaction) logic.
+* Native CSS transitions and animations can be hardware-accelerated (using GPU), resulting in smoother animations.
 
 ### How?
 
-For simple animations use a CSS transition:
+For simple animations use a [CSS transition](https://developer.mozilla.org/en-US/docs/Web/CSS/transition):
 
-``` javascript
+```javascript
 /* avoid: jquery animate */
-$element.animate({ left: '10px' }, 150, easeOut);
+$element.animate({ left: '50px' }, 150, 'easeout');
 ```
 
 ```javascript
@@ -368,16 +372,17 @@ $element.animate({ left: '10px' }, 150, easeOut);
 $element.addClass('is-active');
 ```
 
-``` css
+```css
+/* vendor prefix might be required */
 .is-active {
-	transform: translate(10px);
+	transform: translate(50px);
 	transition: transform 150ms ease-out;
 }
 ```
 
-For more complex animations use a CSS keyframe animation:
+For more complex animations use a [CSS keyframes animation](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes):
 
-``` javascript
+```javascript
 /* avoid: jquery animate */
 function blink() {
   $element
@@ -392,7 +397,7 @@ blink();
 $element.addClass('is-blinking');
 ```
 
-``` css
+```css
 /* vendor prefix might be required */
 .is-blinking {
     animation: blink 2s infinite;
@@ -406,6 +411,7 @@ $element.addClass('is-blinking');
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
+
 
 ## Prefer native Array methods
 
