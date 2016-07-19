@@ -23,7 +23,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 * [Cache jQuery lookups](#cache-jquery-lookups)
 * [Use `.first()` for single element](#use-first-for-single-element)
 * [Use `.on()` for event binding](#use-on-for-event-binding)
-* [Use delegated events](#use-delegated-events)
+* [Use event delegation](#use-event-delegation)
 * [Avoid `.show()`, `.hide()` and `.toggle()`](#avoid-show-hide-and-toggle)
 * [Avoid using `.css()`](#avoid-using-css)
 * [Prefer CSS animations over `.animate()`](#prefer-css-animations-over-animate)
@@ -214,9 +214,11 @@ $('.todo-item').on('click', function() {});
 [↑ back to Table of Contents](#table-of-contents)
 
 
-## Use delegated events
+## Use event delegation
 
-When a selector is provided, the event handler is referred to as delegated. jQuery bubbles the event from the event target up to the element where the handler is attached and runs the handler for any elements along that path matching the selector.
+> When a selector is provided, the event handler is referred to as delegated. jQuery bubbles the event from the event target up to the element where the handler is attached and runs the handler for any elements along that path matching the selector.
+>
+> — [jQuery](http://api.jquery.com/on/#direct-and-delegated-events)
 
 ### Why?
 
@@ -225,12 +227,15 @@ When a selector is provided, the event handler is referred to as delegated. jQue
 
 ### How?
 
-``` javascript
-/* avoid */
-$('button').on('click', function() {});
+```javascript
+$list = $('[todo-list']).first();
+$items = $list.find('[todo-item]');
 
-/* recommended: define a parent element */
-$('button').on('click', '[element]' function() {});
+/* avoid: event listener on each item */
+$items.on('click', function(event) { /* ... */ });
+
+/* recommended: event delegation on list */
+$list.on('click', '[todo-item]', function(event) { /* ... */ });
 ```
 
 [↑ back to Table of Contents](#table-of-contents)
