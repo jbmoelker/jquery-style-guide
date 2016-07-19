@@ -1,6 +1,8 @@
 # jQuery Style Guide
 
-Opinionated *jQuery Style Guide* for teams by [De Voorhoede](https://twitter.com/devoorhoede).
+> Opinionated *jQuery Style Guide* for teams by [De Voorhoede](https://twitter.com/devoorhoede).
+
+[![style guide jquery](https://img.shields.io/badge/style%20guide-jquery-5ed9c7.svg)](https://github.com/voorhoede/jquery-style-guide)
 
 ## Purpose
 
