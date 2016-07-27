@@ -532,11 +532,14 @@ Configure your linter to accept jQuery and `$` as global variable.
 
 ## Create a smaller build
 
-### Why?
-
 > Special builds can be created that exclude subsets of jQuery functionality. This allows for smaller custom builds when the builder is certain that those parts of jQuery are not being used.
 >
 > — [jQuery](https://github.com/jquery/jquery#modules)
+
+### Why?
+
+* Smaller builds download quicker, are parsed quicker and require less memory.
+* Excluding methods best avoided restricts developers from using them (no more `$('p').css('red')`, etc).
 
 ### How?
 
