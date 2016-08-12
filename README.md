@@ -62,7 +62,7 @@ Since the release of jQuery many of its features now have a native browser equiv
 
 ## Consider lightweight alternative
 
-jQuery is the swiss army knive for DOM and event handling and much more. While jQuery offers a wide range of features, you might not need most of them in your project. Simply because you have little functionality or only modern browsers to support. In that case consider a lightweight alternative.
+jQuery is the swiss army knife for DOM and event handling and much more. While jQuery offers a wide range of features, you might not need most of them in your project. Simply because you have little functionality or only modern browsers to support. In that case consider a lightweight alternative.
 
 ### Why?
 
@@ -252,12 +252,12 @@ $button.on('click', function() {});
 ### Why?
 
 * Using delegated events allows for events to be processed even to elements added to the document later
-* Keeps the scope of the event *bubling* shorter and thus performant.
+* Keeps the scope of the event *bubbling* shorter and thus performant.
 
 ### How?
 
 ```javascript
-$list = $('[todo-list']).first();
+$list = $('[todo-list]').first();
 $items = $list.find('[todo-item]');
 
 /* avoid: event listener on each item */
@@ -272,7 +272,7 @@ $list.on('click', '[todo-item]', function(event) { /* ... */ });
 
 ## Avoid `.show()`, `.hide()` and `.toggle()`
 
-JQuery let's you [`.show()`](http://api.jquery.com/show/), [`.hide()`](http://api.jquery.com/hide/) and [`.toggle()`](http://api.jquery.com/toggle/) elements. jQuery toggles an inline `display: none` to achieve this. 
+JQuery lets you [`.show()`](http://api.jquery.com/show/), [`.hide()`](http://api.jquery.com/hide/) and [`.toggle()`](http://api.jquery.com/toggle/) elements. jQuery toggles an inline `display: none` to achieve this. 
 HTML5 introduces a [new global attribute named `[hidden]`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden), which is styled as `display: none` by default. It's better practice to use this native standard and toggle `[hidden]` instead of using  `.show()`, `.hide()` and `.toggle()`.
 
 ### Why?
@@ -382,7 +382,7 @@ $element.addClass('is-active');
 
 ## Prefer CSS animations over `.animate()`
 
-jQuery let's you create complex animation sequences using [.animate()](http://api.jquery.com/animate/). Since the introduction of jQuery native CSS has caught up and now also provides methods to transition and animate elements.
+jQuery lets you create complex animation sequences using [.animate()](http://api.jquery.com/animate/). Since the introduction of jQuery native CSS has caught up and now also provides methods to transition and animate elements.
 
 ### Why?
 
