@@ -38,7 +38,7 @@ This guide aims to improve the way your team uses [jQuery](http://jquery.com/). 
 
 ## About jQuery
 
-[jQuery](http://jquery.com/) is a utility library for easy DOM access & manipulation, event handling, Ajax and more. By using jQuery you can write consise and expressive code which works across modern and legacy browsers. jQuery has extensive tests, detailed documentation, a large active community and an ecosystem of plugins.
+[jQuery](http://jquery.com/) is a utility library for easy DOM access & manipulation, event handling, Ajax and more. By using jQuery you can write concise and expressive code which works across modern and legacy browsers. jQuery has extensive tests, detailed documentation, a large active community and an ecosystem of plugins.
 
 
 ## Consider native browser features
@@ -130,7 +130,7 @@ Note: Be aware [using `defer` in IE <= 9 can cause issues](https://github.com/h5
 
 ### Why?
 
-* Assigning `jQuery` to `$` is a common practice, which developers are familiair to.
+* Assigning `jQuery` to `$` is a common practice, which developers are familiar to.
 * Assigning `jQuery` to `$` within a scope, avoids unexpected conflict with other scripts using `$`.
 * The jQuery documentation and other resources typically use `$`.
 
@@ -158,7 +158,7 @@ const $ = require('jquery');
 Every call to `$(element}` asks jQuery to rescan for the matching element, wrap it in a jQuery object, and create a new instance of something you already have in memory. This is something avoidable if you already did it once.
 
 ### Why?
-* It avoids querying the DOM for the element everytime want to use it, which greatly improves performance.
+* It avoids querying the DOM for the element every time want to use it, which greatly improves performance.
 * You can use descriptive variable names which convey more meaning.
 
 ```javascript
@@ -518,15 +518,6 @@ Configure your linter to accept jQuery and `$` as global variable.
 }
 ```
 
-#### JSHint
-
-```json
-{
-	"jquery": true,
-	"browser": true
-}
-```
-
 [↑ back to Table of Contents](#table-of-contents)
 
 
@@ -543,7 +534,7 @@ Configure your linter to accept jQuery and `$` as global variable.
 
 ### How?
 
-Follow the [official documention on creating a custom build](https://github.com/jquery/jquery#what-you-need-to-build-your-own-jquery) to get you setup.
+Follow the [official documentation on creating a custom build](https://github.com/jquery/jquery#what-you-need-to-build-your-own-jquery) to get you setup.
 
 Then create your own custom build excluding [modules](https://github.com/jquery/jquery#modules) you don't need: 
 
@@ -560,6 +551,6 @@ This custom build is an example that reflects the guidelines presented. Followin
 
 [![CC0](http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
 
-[De Voorhoede](https://twitter.com/devoorhoede) waives all rights to this work worldwide under copyright law, including all related and neighboring rights, to the extent allowed by law.
+[De Voorhoede](https://twitter.com/devoorhoede) waives all rights to this work worldwide under copyright law, including all related and neighbouring rights, to the extent allowed by law.
 
 You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission.
