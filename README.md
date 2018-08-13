@@ -190,7 +190,7 @@ var $amount = $('[data-table] [data-table-amount]');
 var $percentage = $('[data-table] [data-table-percentage]');
 
 /* recommended: using `.find()` which is highly optimised on the parent element */
-var $table = $('[data-table');
+var $table = $('[data-table]');
 var $amount = $table.find('[data-table-amount]');
 var $percentage = $table.find('[data-table-percentage]');
 ```
