@@ -190,7 +190,7 @@ var $amount = $('[data-table] [data-table-amount]');
 var $percentage = $('[data-table] [data-table-percentage]');
 
 /* recommended: using `.find()` which is highly optimised on the parent element */
-var $table = $('[data-table');
+var $table = $('[data-table]');
 var $amount = $table.find('[data-table-amount]');
 var $percentage = $table.find('[data-table-percentage]');
 ```
@@ -297,8 +297,8 @@ Note: If you need to support pre HTML5 browsers use CSS to style `[hidden]` corr
 /* avoid: `.show()` elements */
 $elements.show();
 
-/* recommended: add `[hidden]` attribute */
-$elements.attr('hidden', '');
+/* recommended: remove `[hidden]` attribute */
+$element.removeAttr('hidden')
 ```
 
 #### Hide elements
@@ -307,8 +307,8 @@ $elements.attr('hidden', '');
 /* avoid: `.hide()` elements */
 $elements.hide();
 
-/* recommended: remove `[hidden]` attribute */
-$elements.removeAttr('hidden');
+/* recommended: add `[hidden]` attribute */
+$elements.attr('hidden', '');
 ```
 
 #### Toggle elements
